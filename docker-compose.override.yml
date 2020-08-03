@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - zookeeper
+      - kafka
+    environment:
+      - KAFKA_HOST=192.168.99.100
+      - KAFKA_PORT=9092
+    ports:
+      - 8080:8080
+
+
