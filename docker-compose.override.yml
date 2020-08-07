@@ -8,7 +8,7 @@ services:
       - zookeeper
       - kafka
     environment:
-      - KAFKA_HOST=192.168.99.100
+      - KAFKA_HOST=kafka
       - KAFKA_PORT=9092
     ports:
       - 8080:8080

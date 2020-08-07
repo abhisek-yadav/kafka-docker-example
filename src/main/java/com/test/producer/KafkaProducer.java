@@ -17,32 +17,24 @@ public class KafkaProducer {
 
     Properties props = new Properties();
     props.put("bootstrap.servers", Constants.KAFKA_HOST + ":" + Constants.KAFKA_PORT);
-
+    props.put("acks", "all");
+    props.put("retries", 2);
+    props.put("batch.size", 16384);
+    props.put("linger.ms", 1);
+    props.put("buffer.memory", 33554432);
     props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
     props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-//    Properties properties = new Properties();
-//    properties.put("bootstrap.servers", Constants.KAFKA_HOST + ":" + Constants.KAFKA_PORT);
-//    properties.put("connections.max.idle.ms", 10000);
-//    properties.put("request.timeout.ms", 5000);
-//
-//    try (AdminClient client = AdminClient.create(properties)) {
-//      NewTopic topic = new NewTopic(Constants.TOPIC_NAME, 1, (short) 1);
-//      client.createTopics(Collections.singleton(topic));
-//    }
-
-
-
     try (Producer<String, String> producer = new org.apache.kafka.clients.producer.KafkaProducer<>(
         props)) {
-      producer.send(new ProducerRecord<>(Constants.TOPIC_NAME, message.getKey(), message.getValue()),
-          (rm, ex) -> {
-            if (ex != null) {
-              throw new RuntimeException(ex);
-            }
-          });
+      producer
+          .send(new ProducerRecord<>(Constants.TOPIC_NAME, message.getKey(), message.getValue()),
+              (rm, ex) -> {
+                if (ex != null) {
+                  throw new RuntimeException(ex);
+                }
+              });
     }
-
   }
 
 }

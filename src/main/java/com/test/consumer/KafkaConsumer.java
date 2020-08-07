@@ -27,18 +27,19 @@ public class KafkaConsumer {
     props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
     try (org.apache.kafka.clients.consumer.KafkaConsumer<String, String> consumer = new org.apache.kafka.clients.consumer.KafkaConsumer<>(
         props)) {
-      consumer.subscribe(Collections.singleton(Constants.TOPIC_NAME));
-      while (flag) {
-        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
 
+      consumer.subscribe(Collections.singleton(Constants.TOPIC_NAME));
+
+      while (flag) {
+        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(10000));
         records.forEach(record -> {
           KafkaMessage message = new KafkaMessage(record.key(), record.value());
           messages.add(message);
         });
         flag = false;
       }
-    }
 
+    }
     return messages;
   }
 }
