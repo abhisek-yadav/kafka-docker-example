@@ -37,3 +37,9 @@ Kafka producer/consumer example using docker.
 ##### 3. To stop the running container: 
 
 `docker-compose down`
+
+### Note:
+ 
+     We can use multiple docker-compose files to build an image. By default, docker-compose looks for 'docker-compose.yaml' and 'docker-compose.override.yaml' files in current working directory. But if we have some other docker-compose files with some different name, we can pass them by passing '-f' flag:
+    
+    `docker-compose -f <dockercomposefile1> -f <dockercomposefile2> up` 
