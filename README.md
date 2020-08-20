@@ -42,6 +42,6 @@ Kafka producer/consumer example using docker.
 
 ### Note:
  
-     We can use multiple docker-compose files to build an image. By default, docker-compose looks for 'docker-compose.yaml' and 'docker-compose.override.yaml' files in current working directory. But if we have some other docker-compose files with some different name, we can pass them by passing '-f' flag:
+#### We can use multiple docker-compose files to build an image. By default, docker-compose looks for 'docker-compose.yaml' and 'docker-compose.override.yaml' files in current working directory. But if we have some other docker-compose files with some different name, we can pass them by passing '-f' flag:
     
-    `docker-compose -f <dockercomposefile1> -f <dockercomposefile2> up` 
+`docker-compose -f <dockercomposefile1> -f <dockercomposefile2> up` 
